@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:work_hr_calendar/pages/AddEntry.dart';
-import 'ColumnForCalendar.dart';
-import 'columnWidget.dart';
+import '../components/AddEntry.dart';
+import '../components/columnWidget.dart';
 
 class HeatMapCalendarExample extends StatefulWidget {
   const HeatMapCalendarExample({Key? key}) : super(key: key);
@@ -50,10 +49,10 @@ class _HeatMapCalendarExample extends State<HeatMapCalendarExample> {
             children: <Widget>[
               const Text('Color Mode'),
               CupertinoSwitch(
-                value: isOpacityMode,
+                value: isOpacityMode1,
                 onChanged: (value) {
                   setState(() {
-                    isOpacityMode = value;
+                    isOpacityMode1 = value;
                   });
                 },
               ),

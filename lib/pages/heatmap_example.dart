@@ -1,17 +1,13 @@
-import 'package:intl/intl.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:flutter_heatmap_calendar/flutter_heatmap_calendar.dart';
-import 'package:work_hr_calendar/pages/AddEntry.dart';
-import 'package:provider/provider.dart';
-import 'authContext.dart';
-import 'columnWidget.dart';
+import '../components/AddEntry.dart';
+import '../components/columnWidget.dart';
 
 class HeatMapExample extends StatefulWidget {
   const HeatMapExample({Key? key}) : super(key: key);
 
   @override
-  State<StatefulWidget> createState() => _HeatMapExample();
+  State<StatefulWidget> createState() =>s _HeatMapExample();
 }
 
 class _HeatMapExample extends State<HeatMapExample> {

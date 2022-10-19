@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'pages/heatmap_calendar_example.dart';
 import 'pages/heatmap_example.dart';
 import 'package:provider/provider.dart';
-import 'pages/authContext.dart';
+import 'authContext.dart';
 
 void main() {
   runApp(ChangeNotifierProvider<HeatMapDataSetHere>(
