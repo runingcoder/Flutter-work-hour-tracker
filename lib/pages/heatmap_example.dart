@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
-import '../components/AddEntry.dart';
-import '../components/columnWidget.dart';
+import 'package:flutter_heatmap_calendar/flutter_heatmap_calendar.dart';
+import 'package:intl/intl.dart';
 
 class HeatMapExample extends StatefulWidget {
   const HeatMapExample({Key? key}) : super(key: key);
@@ -14,6 +14,10 @@ class _HeatMapExample extends State<HeatMapExample> {
   final TextEditingController dateController = TextEditingController();
   final TextEditingController heatLevelController = TextEditingController();
 
+  bool isOpacityMode = true;
+
+  Map<DateTime, int> heatMapDatasets = {};
+
   @override
   void dispose() {
     super.dispose();
@@ -21,47 +25,91 @@ class _HeatMapExample extends State<HeatMapExample> {
     heatLevelController.dispose();
   }
 
+  Widget _textField(final String hint, final TextEditingController controller) {
+    return Padding(
+      padding: const EdgeInsets.only(left: 16, right: 20, top: 8.0),
+      child: TextField(
+        controller: controller,
+        decoration: InputDecoration(
+          enabledBorder: const OutlineInputBorder(
+              borderSide: BorderSide(color: Color(0xffe7e7e7), width: 1.0)),
+          focusedBorder: const OutlineInputBorder(
+              borderSide: BorderSide(color: Color(0xFF20bca4), width: 1.0)),
+          hintText: hint,
+          hintStyle: const TextStyle(color: Colors.grey),
+          isDense: true,
+        ),
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      floatingActionButton: FloatingActionButton(
-        onPressed: () {
-          showModalBottomSheet(
-            context: context,
-            builder: (context) => AddEntry(),
-          );
-        },
-        tooltip: 'Increment Counter',
-        child: const Icon(Icons.add),
-      ),
-      backgroundColor: Colors.white,
       appBar: AppBar(
         title: const Text('Heatmap'),
       ),
       body: SafeArea(
-        child: SingleChildScrollView(
-            child: Column(children: [
-          ColumnWidget(title: 2),
-          ColumnWidget(title: 4),
-          ColumnWidget(title: 6),
-          ColumnWidget(title: 8),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: <Widget>[
-              const Text('Color Mode'),
-              CupertinoSwitch(
-                value: isOpacityMode,
-                onChanged: (value) {
-                  setState(() {
-                    isOpacityMode = value;
-                  });
-                },
+        child: Column(
+          children: [
+            Card(
+              margin: const EdgeInsets.all(20),
+              elevation: 20,
+              child: Padding(
+                padding: const EdgeInsets.all(20),
+                child: HeatMapCalendar(
+                  flexible: true,
+                  colorMode:
+                      isOpacityMode ? ColorMode.opacity : ColorMode.color,
+                  datasets: heatMapDatasets,
+                  colorsets: const {
+                    1: Colors.red,
+                    3: Colors.orange,
+                    5: Colors.yellow,
+                    7: Colors.green,
+                    9: Colors.blue,
+                    11: Colors.indigo,
+                    13: Colors.purple,
+                  },
+                  onClick: (value) {
+                    ScaffoldMessenger.of(context).showSnackBar(
+                        SnackBar(content: Text(value.toString())));
+                  },
+                ),
               ),
-              const Text('Opacity Mode'),
-            ],
-          ),
-        ])),
+            ),
+            _textField('YYYYMMDD', dateController),
+            _textField('Hours Worked Today', heatLevelController),
+            ElevatedButton(
+              child: const Text('COMMIT'),
+              onPressed: () {
+                setState(() {
+                  heatMapDatasets[DateTime.parse(dateController.text)] =
+                      int.parse(heatLevelController.text);
+                });
+              },
+            ),
+
+            // ColorMode/OpacityMode Switch.
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: <Widget>[
+                const Text('Color Mode'),
+                CupertinoSwitch(
+                  value: isOpacityMode,
+                  onChanged: (value) {
+                    setState(() {
+                      isOpacityMode = value;
+                    });
+                  },
+                ),
+                const Text('Opacity Mode'),
+              ],
+            ),
+          ],
+        ),
       ),
+      backgroundColor: Colors.white,
     );
   }
 }

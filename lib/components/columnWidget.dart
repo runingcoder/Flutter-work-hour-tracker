@@ -2,15 +2,14 @@ import 'package:intl/intl.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_heatmap_calendar/flutter_heatmap_calendar.dart';
-import 'package:provider/provider.dart';
-import '../authContext.dart';
 
 const durationTime = Duration(seconds: 1);
 bool isOpacityMode = true;
 
 class ColumnWidget extends StatelessWidget {
-  ColumnWidget({required this.title});
+  ColumnWidget({required this.title, required this.heatMapDataset});
   final int title;
+  final Map<DateTime, int> heatMapDataset;
 
   @override
   Widget build(BuildContext context) {
@@ -33,8 +32,7 @@ class ColumnWidget extends StatelessWidget {
             child: HeatMap(
               scrollable: true,
               colorMode: isOpacityMode ? ColorMode.color : ColorMode.opacity,
-              datasets:
-                  Provider.of<HeatMapDataSetHere>(context).getHeatMapDatasets(),
+              datasets: heatMapDataset,
               colorsets: const {
                 1: Colors.yellow,
                 3: Colors.orange,

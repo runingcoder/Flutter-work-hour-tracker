@@ -4,6 +4,7 @@ Widget textField(final String hint, final TextEditingController controller) {
   return Padding(
     padding: const EdgeInsets.only(left: 16, right: 20, top: 8.0),
     child: TextField(
+      autofocus: true,
       controller: controller,
       decoration: InputDecoration(
         enabledBorder: const OutlineInputBorder(

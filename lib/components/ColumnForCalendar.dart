@@ -6,11 +6,11 @@ import 'package:provider/provider.dart';
 import '../authContext.dart';
 
 const durationTime = Duration(seconds: 1);
-bool isOpacityMode1 = true;
 
 class ColumnWidgetCalendar extends StatelessWidget {
-  ColumnWidgetCalendar({required this.title});
+  ColumnWidgetCalendar({required this.title, required this.heatMapDataset});
   final int title;
+  final Map<DateTime, int> heatMapDataset;
 
   @override
   Widget build(BuildContext context) {
@@ -26,23 +26,16 @@ class ColumnWidgetCalendar extends StatelessWidget {
                   fontSize: 20)),
         ),
         Card(
-          margin: const EdgeInsets.all(20),
+          margin: const EdgeInsets.all(10),
           elevation: 5,
           child: Padding(
             padding: const EdgeInsets.all(20),
             child: HeatMapCalendar(
               flexible: true,
-              colorMode: isOpacityMode1 ? ColorMode.color : ColorMode.opacity,
-              datasets:
-                  Provider.of<HeatMapDataSetHere>(context).getHeatMapDatasets(),
+              colorMode: ColorMode.color,
+              datasets: heatMapDataset,
               colorsets: const {
-                1: Colors.yellow,
-                3: Colors.orange,
-                5: Colors.red,
-                7: Colors.green,
-                9: Colors.blue,
-                11: Colors.indigo,
-                13: Colors.purple,
+                1: Colors.green,
               },
               onClick: (value) {
                 ScaffoldMessenger.of(context).showSnackBar(SnackBar(

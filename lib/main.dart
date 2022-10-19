@@ -41,18 +41,60 @@ class _MyHomePageState extends State<MyHomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text('Flutter heatmap example')),
-      body: SafeArea(
-        child: ListView(
-          children: <Widget>[
-            ListTile(
-              title: const Text('Heatmap calendar'),
-              onTap: () => Navigator.of(context).pushNamed('/heatmap_calendar'),
+      appBar:
+          AppBar(centerTitle: true, title: const Text('Work Hours Track App')),
+      body: Padding(
+        padding: const EdgeInsets.symmetric(vertical: 18.0, horizontal: 5),
+        child: Column(
+          children: [
+            Expanded(
+              child: ListView(
+                children: <Widget>[
+                  ListTile(
+                    shape: RoundedRectangleBorder(
+                      //<-- SEE HERE
+                      side: BorderSide(width: 2),
+                      borderRadius: BorderRadius.circular(20),
+                    ),
+                    title: const Text(' Hours in Calendar',
+                        style: TextStyle(
+                            color: Colors.black,
+                            fontSize: 30,
+                            fontStyle: FontStyle.italic,
+                            fontWeight: FontWeight.bold)),
+                    trailing: Icon(color: Colors.blue, Icons.calendar_today),
+                    onTap: () =>
+                        Navigator.of(context).pushNamed('/heatmap_calendar'),
+                  ),
+                  SizedBox(height: 50),
+                  ListTile(
+                    shape: RoundedRectangleBorder(
+                      //<-- SEE HERE
+                      side: BorderSide(width: 2),
+                      borderRadius: BorderRadius.circular(20),
+                    ),
+                    title: const Text('Flutter Heatmap',
+                        style: TextStyle(
+                            color: Colors.black,
+                            fontSize: 30,
+                            fontStyle: FontStyle.italic,
+                            fontWeight: FontWeight.bold)),
+                    trailing:
+                        Icon(color: Colors.green, Icons.calendar_month_rounded),
+                    onTap: () => Navigator.of(context).pushNamed('/heatmap'),
+                  ),
+                ],
+              ),
             ),
-            ListTile(
-              title: const Text('Heatmap'),
-              onTap: () => Navigator.of(context).pushNamed('/heatmap'),
-            ),
+            Container(
+              margin: EdgeInsets.symmetric(horizontal: 30),
+              child: Image(
+                height: 550, //or BoxFit.fill
+                image: AssetImage(
+                  'images/marcus.jpg',
+                ),
+              ),
+            )
           ],
         ),
       ),

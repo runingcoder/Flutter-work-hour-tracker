@@ -16,20 +16,17 @@ class AddEntry extends StatefulWidget {
 class _AddEntryState extends State<AddEntry> {
   @override
   Widget build(BuildContext context) {
-    return Container(
-      color: Colors.white,
-      child: Column(mainAxisAlignment: MainAxisAlignment.center, children: [
-        textField('Hours of Hustle',
-            Provider.of<HeatMapDataSetHere>(context).heatLevelController),
-        ElevatedButton(
-            child: const Text('COMMIT'),
-            onPressed: () {
-              Provider.of<HeatMapDataSetHere>(context, listen: false)
-                  .updateHeatMap();
+    return Column(mainAxisAlignment: MainAxisAlignment.start, children: [
+      textField('Hours of Hustle',
+          Provider.of<HeatMapDataSetHere>(context).heatLevelController),
+      ElevatedButton(
+          child: const Text('COMMIT'),
+          onPressed: () {
+            Provider.of<HeatMapDataSetHere>(context, listen: false)
+                .updateHeatMap();
 
-              Navigator.pop(context);
-            }),
-      ]),
-    );
+            Navigator.pop(context);
+          }),
+    ]);
   }
 }
