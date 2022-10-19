@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import '../components/AddEntry.dart';
-import '../components/columnWidget.dart';
+import '../components/ColumnForCalendar.dart';
 
 class HeatMapCalendarExample extends StatefulWidget {
   const HeatMapCalendarExample({Key? key}) : super(key: key);

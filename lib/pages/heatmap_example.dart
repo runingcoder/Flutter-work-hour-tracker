@@ -7,7 +7,7 @@ class HeatMapExample extends StatefulWidget {
   const HeatMapExample({Key? key}) : super(key: key);
 
   @override
-  State<StatefulWidget> createState() =>s _HeatMapExample();
+  State<StatefulWidget> createState() => _HeatMapExample();
 }
 
 class _HeatMapExample extends State<HeatMapExample> {

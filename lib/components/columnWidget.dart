@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_heatmap_calendar/flutter_heatmap_calendar.dart';
 import 'package:provider/provider.dart';
-import 'authContext.dart';
+import '../authContext.dart';
 
 const durationTime = Duration(seconds: 1);
 bool isOpacityMode = true;
